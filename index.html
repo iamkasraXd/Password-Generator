@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔐 Password Generator</h1>
+            <button id="themeToggle" class="theme-toggle">🌙</button>
+        </div>
+        
+        <div class="main-content">
+            <div class="password-section">
+                <div class="password-display">
+                    <input type="text" id="passwordOutput" readonly placeholder="Your password...">
+                    <button id="copyBtn" class="copy-btn">📋</button>
+                </div>
+                
+                <div class="password-info">
+                    <div class="strength-indicator">
+                        <div class="strength-bar">
+                            <div id="strengthFill" class="strength-fill"></div>
+                        </div>
+                        <span id="strengthText">Very Weak</span>
+                    </div>
+                    <div class="entropy-info">
+                        <span id="entropyText">0 bits</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="controls-section">
+                <div class="control-group">
+                    <label class="control-label">Password Length</label>
+                    <div class="length-control">
+                        <input type="range" id="lengthSlider" min="4" max="128" value="16" class="slider">
+                        <span id="lengthValue" class="length-value">16</span>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">Character Types</label>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="uppercase" checked>
+                            <span class="checkmark"></span>
+                            Uppercase (A-Z)
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="lowercase" checked>
+                            <span class="checkmark"></span>
+                            Lowercase (a-z)
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="numbers" checked>
+                            <span class="checkmark"></span>
+                            Numbers (0-9)
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="symbols" checked>
+                            <span class="checkmark"></span>
+                            Symbols (!@#$)
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">Advanced Options</label>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="excludeSimilar">
+                            <span class="checkmark"></span>
+                            Exclude Similar
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="excludeAmbiguous">
+                            <span class="checkmark"></span>
+                            Exclude Ambiguous
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label" for="modeSelect">Generation Mode</label>
+                    <select id="modeSelect" class="select-input">
+                        <option value="random">Random Secure</option>
+                        <option value="passphrase">Passphrase</option>
+                        <option value="human">Human-Friendly</option>
+                        <option value="developer">Developer</option>
+                    </select>
+                </div>
+                
+                <div id="developerOptions" class="control-group hidden">
+                    <label class="control-label" for="devModeSelect">Developer Type</label>
+                    <select id="devModeSelect" class="select-input">
+                        <option value="api">API Key</option>
+                        <option value="jwt">JWT Secret</option>
+                        <option value="ssh">SSH Passphrase</option>
+                        <option value="hex">Hex Key</option>
+                        <option value="base64">Base64 Key</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="patternInput">Pattern (Optional)</label>
+                    <input type="text" id="patternInput" class="text-input" placeholder="A=Upper, a=lower, #=number, !=symbol">
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="generateBtn" class="btn btn-primary">Generate</button>
+                    <button id="regenerateBtn" class="btn btn-secondary">Regenerate</button>
+                </div>
+            </div>
+            
+            <div class="security-section">
+                <div class="security-item">
+                    <button id="breachCheckBtn" class="btn btn-outline">Check Breach</button>
+                    <div id="breachResult"></div>
+                </div>
+                
+                <div class="security-item">
+                    <label class="control-label" for="clipboardClear">Auto-Clear Clipboard</label>
+                    <select id="clipboardClear" class="select-input">
+                        <option value="0">Disabled</option>
+                        <option value="30">30 seconds</option>
+                        <option value="60" selected>60 seconds</option>
+                        <option value="120">120 seconds</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="toast" class="toast"></div>
+    
+    <script src="js/config.js"></script>
+    <script src="js/generator.js"></script>
+    <script src="js/security.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
