@@ -10,31 +10,35 @@ class SecurityManager {
         const length = password.length;
         let poolSize = 0;
 
-        // Calculate character pool size
         if (/[a-z]/.test(password)) poolSize += 26;
         if (/[A-Z]/.test(password)) poolSize += 26;
         if (/[0-9]/.test(password)) poolSize += 10;
         if (/[^a-zA-Z0-9]/.test(password)) poolSize += 32;
 
+        if (poolSize === 0) return { score: 0, entropy: 0, text: 'Very Weak' };
+
         const entropy = length * Math.log2(poolSize);
         let score = 0;
         let text = 'Very Weak';
 
-        if (entropy >= 256) {
+        if (entropy >= 128) {
             score = 5;
             text = 'Excellent';
-        } else if (entropy >= 128) {
+        } else if (entropy >= 100) {
             score = 4;
             text = 'Very Strong';
-        } else if (entropy >= 60) {
+        } else if (entropy >= 70) {
             score = 3;
             text = 'Strong';
-        } else if (entropy >= 36) {
+        } else if (entropy >= 50) {
             score = 2;
             text = 'Fair';
-        } else if (entropy >= 28) {
+        } else if (entropy > 0) {
             score = 1;
             text = 'Weak';
+        } else {
+            score = 0;
+            text = 'Very Weak';
         }
 
         return { score, entropy: Math.round(entropy), text };
@@ -43,28 +47,20 @@ class SecurityManager {
     updateStrengthDisplay(password) {
         const strength = this.calculateStrength(password);
         const strengthFill = document.getElementById('strengthFill');
-        const strengthText = document.getElementById('strengthText');
+        const strengthBar = document.querySelector('.strength-bar');
         const entropyText = document.getElementById('entropyText');
 
-        // Update progress bar
-        const percentage = Math.min((strength.score / 5) * 100, 100);
-        strengthFill.style.width = percentage + '%';
+        strengthFill.className = 'strength-fill';
+        strengthBar.setAttribute('aria-valuenow', strength.score);
 
-        // Update colors
-        strengthFill.className = '';
-        const colorClass = [
-            'strength-very-weak',
-            'strength-weak', 
-            'strength-fair',
-            'strength-strong',
-            'strength-very-strong',
-            'strength-excellent'
+        const strengthClass = [
+            'strength-very-weak', 'strength-weak', 'strength-fair',
+            'strength-strong', 'strength-very-strong', 'strength-excellent'
         ][strength.score];
-        strengthFill.classList.add(colorClass);
+        
+        strengthFill.classList.add(strengthClass || 'strength-very-weak');
 
-        // Update text
-        strengthText.textContent = strength.text;
-        entropyText.textContent = `${strength.entropy} bits`;
+        entropyText.textContent = `${strength.entropy} bits - ${strength.text}`;
     }
 
     async copyToClipboard(password) {

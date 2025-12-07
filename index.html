@@ -1,31 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Generator</title>
+    <title>Professional Password Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 <body>
+    <video id="video-bg" autoplay muted loop playsinline>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+    
     <div class="container">
         <div class="header">
-            <h1>🔐 Password Generator</h1>
-            <button id="themeToggle" class="theme-toggle">🌙</button>
+            <h1>Password Generator</h1>
         </div>
         
         <div class="main-content">
             <div class="password-section">
                 <div class="password-display">
-                    <input type="text" id="passwordOutput" readonly placeholder="Your password...">
-                    <button id="copyBtn" class="copy-btn">📋</button>
+                    <input type="text" id="passwordOutput" readonly placeholder="P@$$w0rd...">
+                    <button id="copyBtn" class="copy-btn" aria-label="Copy password" title="Copy password">
+                        <i class="ph-copy"></i>
+                    </button>
                 </div>
                 
                 <div class="password-info">
                     <div class="strength-indicator">
-                        <div class="strength-bar">
+                        <div class="strength-bar" role="meter" aria-live="polite" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0">
                             <div id="strengthFill" class="strength-fill"></div>
                         </div>
-                        <span id="strengthText">Very Weak</span>
                     </div>
                     <div class="entropy-info">
                         <span id="entropyText">0 bits</span>
@@ -35,7 +43,7 @@
             
             <div class="controls-section">
                 <div class="control-group">
-                    <label class="control-label">Password Length</label>
+                    <label for="lengthSlider" class="control-label">Password Length</label>
                     <div class="length-control">
                         <input type="range" id="lengthSlider" min="4" max="128" value="16" class="slider">
                         <span id="lengthValue" class="length-value">16</span>
@@ -43,7 +51,7 @@
                 </div>
                 
                 <div class="control-group">
-                    <label class="control-label">Character Types</label>
+                    <p class="control-label">Character Types</p>
                     <div class="checkbox-grid">
                         <label class="checkbox-item">
                             <input type="checkbox" id="uppercase" checked>
@@ -69,7 +77,7 @@
                 </div>
                 
                 <div class="control-group">
-                    <label class="control-label">Advanced Options</label>
+                    <p class="control-label">Advanced Options</p>
                     <div class="checkbox-grid">
                         <label class="checkbox-item">
                             <input type="checkbox" id="excludeSimilar">
@@ -107,18 +115,24 @@
 
                 <div class="control-group">
                     <label class="control-label" for="patternInput">Pattern (Optional)</label>
-                    <input type="text" id="patternInput" class="text-input" placeholder="A=Upper, a=lower, #=number, !=symbol">
+                    <input type="text" id="patternInput" class="text-input" placeholder="e.g., A-a-#-!">
                 </div>
-                
-                <div class="action-buttons">
-                    <button id="generateBtn" class="btn btn-primary">Generate</button>
-                    <button id="regenerateBtn" class="btn btn-secondary">Regenerate</button>
-                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button id="generateBtn" class="btn btn-primary">
+                    <i class="ph-arrows-clockwise"></i>
+                    <span>Generate</span>
+                </button>
+                <button id="regenerateBtn" class="btn btn-secondary">
+                    <i class="ph-dice-five"></i>
+                    <span>Regenerate</span>
+                </button>
             </div>
             
             <div class="security-section">
                 <div class="security-item">
-                    <button id="breachCheckBtn" class="btn btn-outline">Check Breach</button>
+                    <button id="breachCheckBtn" class="btn btn-outline">Check for Breaches</button>
                     <div id="breachResult"></div>
                 </div>
                 
@@ -133,10 +147,13 @@
                 </div>
             </div>
         </div>
+        
+        <div class="copyright">
+            <p>Copyright © 2025 Kasra Ariamanesh - All Rights Reserved.</p>
+        </div>
     </div>
     
-    <div id="toast" class="toast"></div>
-    
+    <script src="js/animations.js"></script>
     <script src="js/config.js"></script>
     <script src="js/generator.js"></script>
     <script src="js/security.js"></script>

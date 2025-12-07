@@ -12,7 +12,7 @@ class Config {
             },
             excludeSimilar: false,
             excludeAmbiguous: false,
-            darkTheme: false
+            darkTheme: true
         };
         this.load();
     }

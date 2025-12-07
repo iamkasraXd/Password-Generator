@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-bg-color text-text-color font-sans grid place-items-center min-h-screen p-4 transition-colors duration-300;
+    }
+
+    h1 {
+        @apply text-2xl font-semibold mb-6 text-center;
+    }
+
+    label {
+        @apply font-medium mb-2 block;
+    }
+
+    select, input[type="text"] {
+        @apply w-full p-3 border border-border-color rounded-lg bg-surface-color text-text-color font-sans transition-colors duration-300;
+    }
+}
+
+@layer components {
+    .container {
+        @apply bg-surface-color rounded-lg shadow-lg p-8 w-full max-w-xl transition-colors duration-300;
+    }
+
+    .options-grid {
+        @apply grid grid-cols-2 gap-4 mt-4;
+    }
+
+    .form-group {
+        @apply mb-4;
+    }
+
+    .password-display {
+        @apply flex items-center mb-4;
+    }
+
+    #passwordOutput {
+        @apply font-mono text-xl bg-bg-color border border-border-color rounded-lg p-3 w-full text-text-color transition-colors duration-300;
+    }
+
+    .btn {
+        @apply font-sans font-semibold border-none rounded-lg px-6 py-3 cursor-pointer transition-all duration-200 inline-flex items-center justify-center gap-2;
+    }
+
+    .btn:hover {
+        @apply transform -translate-y-px;
+    }
+
+    .btn:active {
+        @apply transform translate-y-0;
+    }
+
+    .btn-primary {
+        @apply bg-primary-color text-surface-color;
+    }
+
+    .btn-primary:hover {
+        @apply bg-primary-hover-color;
+    }
+
+    .btn-icon {
+        @apply p-3 ml-2 text-xl;
+    }
+
+    #themeToggle {
+        @apply absolute top-6 right-6 bg-transparent border-none text-text-muted-color text-2xl cursor-pointer;
+    }
+
+    .slider-group {
+        @apply flex items-center gap-4;
+    }
+
+    #lengthSlider {
+        @apply w-full cursor-pointer;
+    }
+
+    #lengthValue {
+        @apply font-mono font-bold text-lg text-accent-color min-w-[2ch] text-right;
+    }
+
+    .checkbox-group {
+        @apply flex items-center gap-2 bg-bg-color p-3 rounded-lg transition-colors duration-300;
+    }
+
+    .strength-section {
+        @apply mt-6;
+    }
+
+    .strength-bar {
+        @apply w-full h-2.5 bg-bg-color rounded-full overflow-hidden mt-2;
+    }
+
+    .strength-fill {
+        @apply h-full w-0 rounded-full transition-all duration-300;
+    }
+
+    .strength-very-weak { @apply w-[10%] bg-red-500; }
+    .strength-weak { @apply w-1/4 bg-orange-500; }
+    .strength-fair { @apply w-1/2 bg-yellow-500; }
+    .strength-strong { @apply w-3/4 bg-green-500; }
+    .strength-very-strong { @apply w-[90%] bg-green-500; }
+    .strength-excellent { @apply w-full bg-blue-500; }
+
+    #entropyText {
+        @apply text-sm text-text-muted-color text-right mt-2;
+    }
+
+    .security-actions {
+        @apply mt-6 border-t border-border-color pt-6;
+    }
+
+    #breachResult {
+        @apply text-center mt-4 font-medium p-2 rounded-lg;
+    }
+    .breach-safe { @apply bg-green-100 text-success-color; }
+    .breach-found { @apply bg-red-100 text-error-color; }
+    .breach-error { @apply bg-yellow-100 text-yellow-600; }
+
+    .toast {
+        @apply fixed bottom-8 left-1/2 -translate-x-1/2 translate-y-[150%] bg-surface-color text-text-color px-6 py-4 rounded-lg shadow-lg flex items-center gap-3 transition-transform duration-400 z-50;
+    }
+
+    .toast.show {
+        @apply -translate-x-1/2 translate-y-0;
+    }
+
+    .toast.success { @apply bg-success-color text-white; }
+    .toast.error { @apply bg-error-color text-white; }
+    .toast.info { @apply bg-accent-color text-white; }
+    .toast i { @apply text-xl; }
+}
+
+@media (max-width: 600px) {
+    body {
+        @apply p-0 block;
+    }
+
+    .container {
+        @apply max-w-full min-h-screen rounded-none shadow-none p-6;
+    }
+
+    .options-grid {
+        @apply grid-cols-1;
+    }
+
+    .password-display {
+        @apply flex-col gap-2;
+    }
+
+    .btn-icon {
+        @apply ml-0 w-full;
+    }
+}

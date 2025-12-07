@@ -1,0 +1,19 @@
+{
+  "name": "fullstack-password-generator",
+  "version": "1.0.0",
+  "description": "A professional password generator",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i ./css/tailwind.css -o ./css/style.css"
+  },
+  "keywords": [
+    "password",
+    "generator",
+    "tailwind"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}
