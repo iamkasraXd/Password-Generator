@@ -23,8 +23,7 @@ A modern, secure password generator with a beautiful glassmorphism UI and video 
 
 ```bash
 git clone https://github.com/iamkasraXd/Password-Generator.git
-cd Fullstack-Password-Generator
-# Add video.mp4 file
+cd Password-Generator
 open index.html
 ```
 
